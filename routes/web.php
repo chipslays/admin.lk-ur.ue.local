@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
             'tickets' => $query
                 ->with(['user', 'firstMessage'])
                 ->latest()
-                ->paginate(20)
+                ->paginate(10)
                 ->onEachSide(1)
                 ->withQueryString(),
             'filters' => request()->only(['search', 'status']),

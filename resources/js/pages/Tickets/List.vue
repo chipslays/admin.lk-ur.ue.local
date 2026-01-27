@@ -60,56 +60,59 @@
                                 Отменено: {{ counts.cancelled }}
                             </Link>
                         </div>
-                        <template v-for="item in tickets.data" :key="`ticket_${item.id}`">
-                            <div class="p-6 rounded-brand bg-gray-100 border">
-                                <Link :href="route('tickets.show', { id: item.id })" class="flex flex-col gap-4">
-                                    <div class="text-gray-500 text-xs flex items-center gap-2">
-                                        <div class="flex">
-                                            <div :class="{
-                                                'text-green-50 bg-green-500': item.status === 'open',
-                                                'text-yellow-50 bg-yellow-500': item.status === 'in_progress',
-                                                'text-danger-50 bg-red-500': item.status === 'closed',
-                                                'text-gray-600 bg-gray-200': item.status === 'cancelled',
-                                            }" class="font-medium px-1.5 py-0.5 rounded-brand text-xs">
-                                                <template v-if="item.status === 'open'">
-                                                    Открыто
-                                                </template>
-                                                <template v-else-if="item.status === 'in_progress'">
-                                                    В работе
-                                                </template>
-                                                <template v-else-if="item.status === 'closed'">
-                                                    Закрыто
-                                                </template>
-                                                <template v-else-if="item.status === 'cancelled'">
-                                                    Отменено
-                                                </template>
+                        <template v-if="tickets.data.length > 0">
+                            <template v-for="item in tickets.data" :key="`ticket_${item.id}`">
+                                <div class="p-6 rounded-brand bg-gray-100 border">
+                                    <Link :href="route('tickets.show', { id: item.id })" class="flex flex-col gap-4">
+                                        <div class="text-gray-500 text-xs flex items-center gap-2">
+                                            <div class="flex">
+                                                <div :class="{
+                                                    'text-green-50 bg-green-500': item.status === 'open',
+                                                    'text-yellow-50 bg-yellow-500': item.status === 'in_progress',
+                                                    'text-danger-50 bg-red-500': item.status === 'closed',
+                                                    'text-gray-600 bg-gray-200': item.status === 'cancelled',
+                                                }" class="font-medium px-1.5 py-0.5 rounded-brand text-xs">
+                                                    <template v-if="item.status === 'open'">
+                                                        Открыто
+                                                    </template>
+                                                    <template v-else-if="item.status === 'in_progress'">
+                                                        В работе
+                                                    </template>
+                                                    <template v-else-if="item.status === 'closed'">
+                                                        Закрыто
+                                                    </template>
+                                                    <template v-else-if="item.status === 'cancelled'">
+                                                        Отменено
+                                                    </template>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="">
-                                            Обращение №{{ item.id }} от {{ new Date(item.created_at).toLocaleString() }}
-                                        </div>
-                                    </div>
-                                    <div class="text-base font-medium">
-                                        {{ item.title }}
-                                    </div>
-                                    <div v-if="item.first_message" class="text-gray-700 line-clamp-2 leading-relaxed hyphens-auto">
-                                        {{ item.first_message.message }}
-                                    </div>
-                                    <div class="text-xs">
-                                        <div class="flex items-center gap-4">
                                             <div class="">
-                                                {{ item.user?.name ?? 'Пользователь' }}
-                                            </div>
-                                            <div class="text-gray-500">
-                                                {{ item.email ?? '-' }}
-                                            </div>
-                                            <div class="text-gray-500">
-                                                {{ item.phone ?? '-' }}
+                                                Обращение №{{ item.id }} от {{ new Date(item.created_at).toLocaleString() }}
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            </div>
+                                        <div class="text-base font-medium">
+                                            {{ item.title }}
+                                        </div>
+                                        <div v-if="item.first_message" class="text-gray-700 line-clamp-2 leading-relaxed hyphens-auto">
+                                            {{ item.first_message.message }}
+                                        </div>
+                                        <div class="text-xs">
+                                            <div class="flex items-center gap-4">
+                                                <div class="">
+                                                    {{ item.user?.name ?? 'Пользователь' }}
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    {{ item.email ?? '-' }}
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    {{ item.phone ?? '-' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </template>
+                            <Pagination :links="tickets.links" />
                         </template>
                         <template v-if="tickets.data.length === 0">
                             <div class="p-12 flex items-center justify-center rounded-brand bg-gray-100 border-2 border-dashed text-gray-500">
@@ -130,6 +133,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { useUser } from '@/composables/useUser';
 import { LogOutIcon, SearchIcon } from 'lucide-vue-next';
 import Header from '@/components/Header.vue';
+import Pagination from '@/components/Pagination.vue';
 
 const props = defineProps({
     tickets: Object,
