@@ -5,13 +5,13 @@
         <button
           v-if="link.url === null"
           disabled
-          class="mr-1 mb-1 px-3 py-2 border rounded-brand flex items-center justify-center opacity-70 min-w-10"
+          class="mr-1 mb-1 px-3 py-2 border rounded-brand flex items-center justify-center opacity-70 min-w-10 bg-white"
           v-html="link.label"
         />
         <Link
           v-else
-          class="mr-1 mb-1 px-3 py-2 border rounded-brand flex items-center justify-center min-w-10"
-          :class="{ 'bg-black text-white': link.active }"
+          class="mr-1 mb-1 px-3 py-2 border rounded-brand flex items-center justify-center min-w-10 bg-white"
+          :class="{ '!bg-black text-white': link.active }"
           :href="link.url"
           v-html="link.label"
           preserve-scroll
