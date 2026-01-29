@@ -235,10 +235,9 @@
 
 <script setup>
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { useUser } from '@/composables/useUser';
-import { ArrowLeftIcon, ChevronsUpDownIcon, DownloadIcon, LogOutIcon } from 'lucide-vue-next';
+import { ArrowLeftIcon, ChevronsUpDownIcon, DownloadIcon } from 'lucide-vue-next';
 import Header from '@/components/Header.vue';
 
 const props = defineProps({

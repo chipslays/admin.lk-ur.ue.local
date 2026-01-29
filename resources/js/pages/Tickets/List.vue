@@ -8,7 +8,7 @@
                 <div class="">
                     <div class="flex flex-col gap-4">
                         <div class="pb-4 pt-8 font-medium text-xl">
-                            Обращения
+                            Обращения ЛК ЮЛ
                         </div>
                         <form @submit.prevent="handleSearch" class="flex items-center gap-2">
                             <input
@@ -130,8 +130,7 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { useUser } from '@/composables/useUser';
-import { LogOutIcon, SearchIcon } from 'lucide-vue-next';
+import { SearchIcon } from 'lucide-vue-next';
 import Header from '@/components/Header.vue';
 import Pagination from '@/components/Pagination.vue';
 
