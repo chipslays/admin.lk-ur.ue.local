@@ -15,7 +15,7 @@
                                 </div>
                             </button>
                         </div> -->
-                        <div class="p-4 rounded-brand bg-gray-100 border">
+                        <div class="pt-8 px-4 pb-4 rounded-brand bg-gray-100 border">
                             <div class="text-xl font-semibold">
                                 {{ ticket.title }}
                             </div>
