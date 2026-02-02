@@ -7,14 +7,14 @@
             <div class="max-w-4xl w-full mx-auto">
                 <div class="">
                     <div class="flex flex-col gap-4">
-                        <div class="flex pb-4 pt-8">
+                        <!-- <div class="flex pb-4 pt-8">
                             <button @click="window.history.back()" class="flex items-center gap-2 font-medium">
                                 <ArrowLeftIcon class="shrink-0 size-4" />
                                 <div>
                                     Вернуться назад
                                 </div>
                             </button>
-                        </div>
+                        </div> -->
                         <div class="p-4 rounded-brand bg-gray-100 border">
                             <div class="text-xl font-semibold">
                                 {{ ticket.title }}
