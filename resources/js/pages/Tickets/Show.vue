@@ -20,96 +20,108 @@
                                 {{ ticket.title }}
                             </div>
                             <div class="mt-4 flex items-center justify-between gap-4">
-                                <div x-data="{ open: false }" x-on:click.outside="open = false" class="flex">
-                                    <button x-ref="button" x-on:click="open = !open" class="px-3 py-1.5 rounded-brand border bg-white flex items-center gap-1">
-                                        <div :class="{
-                                            'text-green-600': ticket.status === 'open',
-                                            'text-yellow-500': ticket.status === 'in_progress',
-                                            'text-danger-500': ticket.status === 'closed',
-                                            'text-gray-500': ticket.status === 'cancelled',
-                                        }" class="font-medium">
-                                            <template v-if="ticket.status === 'open'">
-                                                Открыто
-                                            </template>
-                                            <template v-else-if="ticket.status === 'in_progress'">
-                                                В работе
-                                            </template>
-                                            <template v-else-if="ticket.status === 'closed'">
-                                                Закрыто
-                                            </template>
-                                            <template v-else-if="ticket.status === 'cancelled'">
-                                                Отменено
-                                            </template>
+                                <div class="flex items-center gap-4">
+                                    <div x-data="{ open: false }" x-on:click.outside="open = false" class="flex">
+                                        <button x-ref="button" x-on:click="open = !open" class="px-3 py-1.5 rounded-brand border bg-white flex items-center gap-1">
+                                            <div :class="{
+                                                'text-green-600': ticket.status === 'open',
+                                                'text-yellow-500': ticket.status === 'in_progress',
+                                                'text-danger-500': ticket.status === 'closed',
+                                                'text-gray-500': ticket.status === 'cancelled',
+                                            }" class="font-medium">
+                                                <template v-if="ticket.status === 'open'">
+                                                    Открыто
+                                                </template>
+                                                <template v-else-if="ticket.status === 'in_progress'">
+                                                    В работе
+                                                </template>
+                                                <template v-else-if="ticket.status === 'closed'">
+                                                    Закрыто
+                                                </template>
+                                                <template v-else-if="ticket.status === 'cancelled'">
+                                                    Отменено
+                                                </template>
+                                            </div>
+                                            <ChevronsUpDownIcon class="shrink-0 size-4 text-gray-400" />
+                                        </button>
+                                        <div x-show="open" x-cloak x-anchor.bottom-start.offset.8="$refs.button" class="w-48 bg-white rounded-brand border shadow z-10">
+                                            <div class="p-1 flex flex-col gap-1">
+                                                <Link :href="route('tickets.set-status', { id: ticket.id, status: 'open' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-green-600">
+                                                    Открыто
+                                                </Link>
+                                                <Link :href="route('tickets.set-status', { id: ticket.id, status: 'in_progress' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-yellow-600">
+                                                    В работе
+                                                </Link>
+                                                <Link :href="route('tickets.set-status', { id: ticket.id, status: 'closed' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-danger-500">
+                                                    Закрыто
+                                                </Link>
+                                                <Link :href="route('tickets.set-status', { id: ticket.id, status: 'cancelled' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-gray-500">
+                                                    Отменено
+                                                </Link>
+                                            </div>
                                         </div>
-                                        <ChevronsUpDownIcon class="shrink-0 size-4 text-gray-400" />
-                                    </button>
-                                    <div x-show="open" x-cloak x-anchor.bottom-start.offset.8="$refs.button" class="w-48 bg-white rounded-brand border shadow z-10">
-                                        <div class="p-1 flex flex-col gap-1">
-                                            <Link :href="route('tickets.set-status', { id: ticket.id, status: 'open' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-green-600">
-                                                Открыто
-                                            </Link>
-                                            <Link :href="route('tickets.set-status', { id: ticket.id, status: 'in_progress' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-yellow-600">
-                                                В работе
-                                            </Link>
-                                            <Link :href="route('tickets.set-status', { id: ticket.id, status: 'closed' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-danger-500">
-                                                Закрыто
-                                            </Link>
-                                            <Link :href="route('tickets.set-status', { id: ticket.id, status: 'cancelled' })" x-on:click="open = false" method="post" as="button" class="px-3 py-2 rounded-brand text-left hover:bg-gray-100 text-gray-500">
-                                                Отменено
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4 text-xs">
-                                    <div class="text-gray-500">
-                                        Создано {{ new Date(ticket.created_at).toLocaleString() }}
                                     </div>
                                     <div v-if="ticket.status === 'closed' && ticket.closed_at" class="text-red-500">
                                         Закрыто {{ new Date(ticket.closed_at).toLocaleString() }}
                                     </div>
                                 </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="text-gray-500">
+                                        Создано {{ new Date(ticket.created_at).toLocaleString() }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="p-4 rounded-brand bg-gray-100 border grid grid-cols-3 gap-4">
-                            <div class="font-medium">
+                            <div class="font-medium col-span-full">
                                 Потребитель
                             </div>
+                            <div class="p-4 col-span-full rounded-brand border bg-white grid grid-cols-3 gap-4">
+                                <div class="col-span-full">
+                                    <div class="text-xs text-gray-500">
+                                        Пользователь
+                                    </div>
+                                    <div class="truncate">
+                                        {{ ticket.user.name }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">
+                                        Договор
+                                    </div>
+                                    <div class="truncate">
+                                        {{ ticket.dog_number ? `№${ticket.dog_number}` : '-' }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">
+                                        Почта
+                                    </div>
+                                    <div class="truncate">
+                                        {{ ticket.email }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">
+                                        Телефон
+                                    </div>
+                                    <div class="truncate">
+                                        {{ ticket.phone }}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-span-full">
-                                <div class="text-xs text-gray-500">
-                                    Пользователь
-                                </div>
-                                <div class="truncate">
-                                    {{ ticket.user.name }}
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-xs text-gray-500">
-                                    Договор
-                                </div>
-                                <div class="truncate">
-                                    {{ ticket.dog_number ? `№${ticket.dog_number}` : '-' }}
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-xs text-gray-500">
-                                    Почта
-                                </div>
-                                <div class="truncate">
-                                    {{ ticket.email }}
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-xs text-gray-500">
-                                    Телефон
-                                </div>
-                                <div class="truncate">
-                                    {{ ticket.phone }}
+                                <div class="flex">
+                                    <a :href="`http://new-lk-ur.ulenergo.ru/ue/auth?username=${ticket.user.username}`" target="_blank" class="flex items-center gap-2 text-primary-500 hover:text-primary-600">
+                                        <ExternalLinkIcon class="shrink-0 size-4" />
+                                        Войти под пользователем в личный кабинет
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="p-4 rounded-brand bg-gray-100 border flex flex-col gap-4">
-                            <div class="flex items-center justify-between gap-4">
-                                <div class="font-medium">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex-1 font-medium">
                                     Заметка
                                 </div>
                                 <div v-if="notesForm.processing" class="text-gray-500">
@@ -122,9 +134,9 @@
                             <textarea
                                 v-model="notesForm.notes"
                                 @input="handleNotesChange"
-                                class="p-3 w-full border rounded-brand min-h-16 max-h-96 bg-white"
+                                class="p-3 w-full border rounded-brand min-h-16 max-h-96 bg-white focus:ring-4 focus:ring-gray-200 focus:border-gray-300"
                                 rows="1"
-                                placeholder="Текст заметки"
+                                placeholder="Текст заметки виден только специалисту. Сохраняется автоматически."
                             ></textarea>
                         </div>
                         <div class="p-4 rounded-brand bg-gray-100 border flex flex-col gap-4">
@@ -176,7 +188,7 @@
                                 <div>
                                     <textarea
                                         v-model="messageForm.message"
-                                        class="p-3 w-full border rounded-brand min-h-16 max-h-96 bg-white"
+                                        class="p-3 w-full border rounded-brand min-h-16 max-h-96 bg-white focus:ring-4 focus:ring-gray-200 focus:border-gray-300"
                                         rows="3"
                                         placeholder="Текст ответа"
                                         :class="{ 'border-red-500': messageForm.errors.message }"
@@ -234,11 +246,11 @@
 </template>
 
 <script setup>
-import { Head, Link, router, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
-import AppLayout from '@/layouts/AppLayout.vue';
-import { ArrowLeftIcon, ChevronsUpDownIcon, DownloadIcon } from 'lucide-vue-next';
 import Header from '@/components/Header.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { Head, Link, router, useForm } from '@inertiajs/vue3';
+import { ArrowLeftIcon, ChevronsUpDownIcon, DownloadIcon, ExternalLinkIcon, InfoIcon } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const props = defineProps({
     ticket: Object,

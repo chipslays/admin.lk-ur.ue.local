@@ -1,5 +1,5 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
                 mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
             },
             colors: {
-                primary: colors.yellow,
+                primary: colors.orange,
                 info: colors.blue,
                 success: colors.green,
                 danger: colors.red,

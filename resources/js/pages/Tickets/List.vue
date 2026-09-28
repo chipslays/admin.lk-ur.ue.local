@@ -64,14 +64,17 @@
                             <template v-for="item in tickets.data" :key="`ticket_${item.id}`">
                                 <div class="p-6 rounded-brand bg-gray-100 border">
                                     <Link :href="route('tickets.show', { id: item.id })" class="flex flex-col gap-4">
-                                        <div class="text-gray-500 text-xs flex items-center gap-2">
+                                        <div class="text-gray-500 flex items-center justify-between gap-2">
+                                            <div class="">
+                                                Обращение №{{ item.id }} от {{ new Date(item.created_at).toLocaleString() }}
+                                            </div>
                                             <div class="flex">
                                                 <div :class="{
                                                     'text-green-50 bg-green-500': item.status === 'open',
                                                     'text-yellow-50 bg-yellow-500': item.status === 'in_progress',
                                                     'text-danger-50 bg-red-500': item.status === 'closed',
                                                     'text-gray-600 bg-gray-200': item.status === 'cancelled',
-                                                }" class="font-medium px-1.5 py-0.5 rounded-brand text-xs">
+                                                }" class="font-medium px-2 py-1 rounded-brand">
                                                     <template v-if="item.status === 'open'">
                                                         Открыто
                                                     </template>
@@ -86,21 +89,21 @@
                                                     </template>
                                                 </div>
                                             </div>
-                                            <div class="">
-                                                Обращение №{{ item.id }} от {{ new Date(item.created_at).toLocaleString() }}
-                                            </div>
                                         </div>
                                         <div class="text-base font-medium">
                                             {{ item.title }}
                                         </div>
-                                        <div v-if="item.first_message" class="text-gray-700 line-clamp-2 leading-relaxed hyphens-auto">
-                                            {{ item.first_message.message }}
-                                        </div>
-                                        <div class="text-xs">
-                                            <div class="flex items-center gap-4">
-                                                <div class="">
-                                                    {{ item.user?.name ?? 'Пользователь' }}
+
+                                        <div class="flex flex-col gap-2">
+                                            <div class="">
+                                                {{ item.user?.name ?? 'Пользователь' }}
+                                            </div>
+                                            <div v-if="item.first_message" class="flex">
+                                                <div class="text-gray-800 line-clamp-2 leading-relaxed hyphens-auto bg-gray-200 px-3 py-2 rounded-2xl rounded-tl-none">
+                                                    {{ item.first_message.message }}
                                                 </div>
+                                            </div>
+                                            <div class="flex items-center gap-4">
                                                 <div class="text-gray-500">
                                                     {{ item.email ?? '-' }}
                                                 </div>
@@ -127,12 +130,12 @@
 </template>
 
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
-import { ref } from 'vue';
-import AppLayout from '@/layouts/AppLayout.vue';
-import { SearchIcon } from 'lucide-vue-next';
 import Header from '@/components/Header.vue';
 import Pagination from '@/components/Pagination.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { SearchIcon } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const props = defineProps({
     tickets: Object,
