@@ -150,7 +150,7 @@
                                             {{ message.user?.name }} (Потребитель)
                                         </template>
                                         <template v-else>
-                                            <img class="size-4 shrink-0" src="/images/logo.svg" alt="logo">
+                                            <img class="size-4 shrink-0" src="/images/logo.svg?28092026" alt="logo">
                                             <span>
                                                 {{ message.manager_name }} (Ульяновскэнерго)
                                             </span>

@@ -2,7 +2,7 @@
     <header class="p-4 rounded-brand bg-gray-100 border flex items-center justify-between gap-4 max-w-4xl mx-auto">
         <div class="flex items-center gap-4">
             <Link href="/" class="block">
-                <img class="size-8 shrink-0" src="/images/logo.svg" alt="logo">
+                <img class="size-8 shrink-0" src="/images/logo.svg?28092026" alt="logo">
             </Link>
         </div>
         <div class="flex items-center gap-4">
