@@ -95,7 +95,7 @@
                                         </div>
 
                                         <div class="flex flex-col gap-2">
-                                            <div class="">
+                                            <div class="font-medium">
                                                 {{ item.user?.name ?? 'Пользователь' }}
                                             </div>
                                             <div v-if="item.first_message">
