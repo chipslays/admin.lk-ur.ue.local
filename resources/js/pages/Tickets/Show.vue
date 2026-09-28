@@ -125,9 +125,10 @@
                                     Заметка
                                 </div>
                                 <div v-if="notesForm.processing" class="text-gray-500">
-                                    Сохранение
+                                    Сохранение...
                                 </div>
-                                <div v-else-if="notesSaved" class="text-green-600">
+                                <div v-else-if="notesSaved" class="text-green-600 flex items-center gap-2">
+                                    <CheckCheckIcon class="shrink-0 size-4" />
                                     Сохранено
                                 </div>
                             </div>
@@ -249,7 +250,7 @@
 import Header from '@/components/Header.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
-import { ArrowLeftIcon, ChevronsUpDownIcon, DownloadIcon, ExternalLinkIcon, InfoIcon } from 'lucide-vue-next';
+import { ArrowLeftIcon, CheckCheckIcon, ChevronsUpDownIcon, DownloadIcon, ExternalLinkIcon, InfoIcon } from 'lucide-vue-next';
 import { ref } from 'vue';
 
 const props = defineProps({
