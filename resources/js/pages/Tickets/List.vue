@@ -62,8 +62,8 @@
                         </div>
                         <template v-if="tickets.data.length > 0">
                             <template v-for="item in tickets.data" :key="`ticket_${item.id}`">
-                                <div class="p-6 rounded-brand bg-gray-100 border">
-                                    <Link :href="route('tickets.show', { id: item.id })" class="flex flex-col gap-4">
+                                <div class="p-6 rounded-brand bg-white border hover:shadow-xl hover:shadow-gray-800/5">
+                                    <Link :href="route('tickets.show', { id: item.id })" class="group/item flex flex-col gap-4">
                                         <div class="text-gray-500 flex items-center justify-between gap-2">
                                             <div class="">
                                                 Обращение №{{ item.id }} от {{ new Date(item.created_at).toLocaleString() }}
@@ -90,7 +90,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-base font-medium">
+                                        <div class="text-base font-medium group-hover/item:text-primary-500">
                                             {{ item.title }}
                                         </div>
 
@@ -98,8 +98,8 @@
                                             <div class="">
                                                 {{ item.user?.name ?? 'Пользователь' }}
                                             </div>
-                                            <div v-if="item.first_message" class="flex">
-                                                <div class="text-gray-800 line-clamp-2 leading-relaxed hyphens-auto bg-gray-200 px-3 py-2 rounded-2xl rounded-tl-none">
+                                            <div v-if="item.first_message">
+                                                <div class="text-gray-800 leading-relaxed line-clamp-2">
                                                     {{ item.first_message.message }}
                                                 </div>
                                             </div>

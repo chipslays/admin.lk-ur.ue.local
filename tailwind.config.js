@@ -24,8 +24,7 @@ module.exports = {
                 success: colors.green,
                 danger: colors.red,
                 // white: '#F2F0EF',
-                black: '#101010',
-                gray: colors.gray,
+                gray: colors.slate,
             },
             borderRadius: {
                 brand: defaultTheme.borderRadius.xl,

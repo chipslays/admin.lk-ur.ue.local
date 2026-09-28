@@ -135,7 +135,7 @@
                                 v-model="notesForm.notes"
                                 @input="handleNotesChange"
                                 class="p-3 w-full border rounded-brand min-h-16 max-h-96 bg-white focus:ring-4 focus:ring-gray-200 focus:border-gray-300"
-                                rows="1"
+                                rows="3"
                                 placeholder="Текст заметки виден только специалисту. Сохраняется автоматически."
                             ></textarea>
                         </div>
